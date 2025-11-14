@@ -4,5 +4,5 @@ queue() {
   trap "kill -s HUP %; trap 'kill -s TERM %' INT; wait" INT
   $1 | parallel --jobs "${2}" --progress --timeout "${3}" --delay "${4}" &
   wait
-  trap - INT
+  trap '' INT
 }
