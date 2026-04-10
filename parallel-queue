@@ -1,6 +1,8 @@
 #! /bin/bash
 
 queue() {
+  if [[ "${#}" -ne 4 ]]; then return 1; fi
+
   trap "kill -s HUP %; trap 'kill -s TERM %' INT; wait" INT
   $1 | parallel --jobs "${2}" --progress --timeout "${3}" --delay "${4}" &
   wait
